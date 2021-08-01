@@ -1,0 +1,57 @@
+*,
+*::before,
+::after {
+  box-sizing: border-box;
+  font-family: Roboto, Arial, Helvetica;
+}
+
+body {
+  margin: 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.youtube-logo {
+  height: 70px;
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  margin: 0 2rem 0 4rem;
+}
+
+.search-input {
+  width: 100%;
+  font-size: inherit;
+  padding: 0.4em;
+  border: 1px solid #777;
+  border-bottom-right-radius: 0;
+}
+
+.search-btn {
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+  border: 1px solid #777;
+  background-color: #f8f8f8;
+  border-left: none;
+  border-top-left-radius: 0;
+  cursor: pointer;
+}
+.search-btn:hover {
+  background-color: #f0f0f0;
+}
+
+#videos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 3rem 0;
+  margin: 0 1.5rem;
+  border-top: 4px solid white;
+}

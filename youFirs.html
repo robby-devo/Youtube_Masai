@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styfir.css" />
+  </head>
+  <body>
+    <header class="header">
+      <a href="#">
+        <img
+          src="https://cdn.mos.cms.futurecdn.net/8gzcr6RpGStvZFA2qRt4v6-1200-80.jpg"
+          alt=""
+          class="youtube-logo"
+        />
+      </a>
+      <div class="search-bar">
+        <input
+          class="search-input"
+          name=""
+          placeholder="search"
+          aria-label="Search"
+          type="text"
+          id="query"
+        />
+        <button type="submit" class="search-btn" onclick="findVideos()">
+          <span class="material-icons-outlined"> search </span>
+        </button>
+        <!--  <input type="text" id="query" />
+    <button onclick="findVideos()">Search</button> -->
+      </div>
+    </header>
+    <div id="videos"></div>
+  </body>
+</html>
+<script>
+  let videos_div = document.getElementById("videos");
+  // https://youtube.googleapis.com/youtube/v3/search?key=[YOUR_API_KEY] HTTP/1.1
+
+  async function findVideos() {
+    videos_div.innerHTML = null;
+
+    let q = document.getElementById("query").value;
+    let res = await fetch(
+      `https://youtube.googleapis.com/youtube/v3/search?q=${q}&key=AIzaSyAk-M3RBAXHpPVcgY4w1zVEe3sAFeXidXc  `
+    );
+
+    let data = await res.json();
+    console.log(data);
+
+    // data.forEach((video) => {});
+
+    let { items } = data;
+
+    items = items.filter((el) => {
+      return el.id.videoId != undefined;
+    });
+
+    items.forEach(({ id: { videoId } }) => {
+      let div = document.createElement("div");
+
+      div.style.marginTop = "20px";
+
+      div.innerHTML = `<iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/${videoId}"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe> `;
+
+      videos_div.appendChild(div);
+    });
+  }
+  //   findVideos();
+</script>
